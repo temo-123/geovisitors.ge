@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteRule ^$ public/ [L]
+	RewriteRule ((?s).*) public/$1 [L]
+</IfModule>
+
+
+RewriteEngine on
+	RewriteCond %{HTTP_HOST} ^geovisitors.ge$ [NC,OR]
+	RewriteCond %{HTTP_HOST} ^www.geovisitors.ge$
+	RewriteCond %{REQUEST_URI} !public/
+RewriteRule (.*) /public/$1 [L]
