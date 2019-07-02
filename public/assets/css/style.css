@@ -415,3 +415,7 @@ img {
             transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -300, -225, 0, 1);
   }
 }
+
+.central_text p{
+  text-align: center;
+}

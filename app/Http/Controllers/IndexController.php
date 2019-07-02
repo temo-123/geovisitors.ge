@@ -18,10 +18,10 @@ class IndexController extends Controller
 {
 	public function execute(Request $request) {
     	$abouts = About::take(1)->get();
-    	$blogs = Blog::latest('id')->limit(8)->get();
-    	$services = Service::where('id','<',20)->get();
-    	$galleries = Gallery::take(6)->get();
-        $tours = Tour::get();
+    	$blogs = Blog::where('published','=','1')->latest('id')->limit(4)->get();
+    	$services = Service::where('published','=','1')->get();
+    	$galleries = Gallery::where('published','=','1')->take(6)->get();
+        $tours = Tour::where('published','=','1')->get();
 
         $data = [
             'services' => $services,
@@ -31,7 +31,7 @@ class IndexController extends Controller
             'tours' => $tours,
 
             'index' => 1,
-            'thurs_num' => 1
+            'thurs_num' => 0
         ];
         return view('site.index', $data);
     }

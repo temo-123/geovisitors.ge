@@ -27,7 +27,7 @@
                 <section class="col-4 col-12-mobile">
                   <header>
                     <h2 class="icon fa-file circled"></h2>
-                    <h3>Portfolio</h3>
+                    <h3>Blog</h3>
                   </header>
                   <ul class="divided">
                     @foreach($blog_all_page as $portfolio)
@@ -61,23 +61,24 @@
                 </section>
 
             </div>
-            <hr />
+            <!-- <hr /> -->
             <div class="row">
               <div class="col-12">
 
                 <!-- Contact -->
                   <section class="contact">
-                    <header>
-                      <h3>Nisl turpis nascetur interdum?</h3>
-                    </header>
-                    <p>Urna nisl non quis interdum mus ornare ridiculus egestas ridiculus lobortis vivamus tempor aliquet.</p>
                     <ul class="icons">
-                      <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-                      <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-                      <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-                      <li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
-                      <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-                      <li><a href="#" class="icon fa-linkedin"><span class="label">Linkedin</span></a></li>
+                    @foreach($about_all_page as $about)
+                      @if($about->fb != NULL)
+                      <li><a href="{{$about->fb}}" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                      @endif
+                      @if($about->inst != NULL)
+                      <li><a href="{{$about->inst}}" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                      @endif
+                      @if($about->twit != NULL)
+                      <li><a href="{{$about->twit}}" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                      @endif
+                    @endforeach
                     </ul>
                   </section>
 

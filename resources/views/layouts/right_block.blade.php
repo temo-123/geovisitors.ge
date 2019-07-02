@@ -15,7 +15,7 @@
                   </div>
                 </section>
                 <hr />
-@if(isset($portfolio_count))
+                @if(isset($portfolio_count))
                 @if($portfolio_count>0)
                 <section>
                   <header>

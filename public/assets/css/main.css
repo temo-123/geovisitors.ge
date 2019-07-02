@@ -3119,10 +3119,10 @@ input, select, textarea {
 
 
 
-.header_title_border{
+/*.header_title_border{
 	-webkit-text-stroke-width: 2.0px;
     -webkit-text-stroke-color: #1b00ae;
-}
+}*/
 .top_menu_text_size{
     font-size: 120%;
 }

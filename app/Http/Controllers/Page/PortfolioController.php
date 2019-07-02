@@ -19,8 +19,8 @@ class PortfolioController extends Controller
         if (view()->exists('site.service')) {
             $article = Blog::where('title',strip_tags($name))->first();
 
-            $portfolios = Blog::where('category',strip_tags($name))->limit(8)->get();
-            $portfolio_count = Blog::where('category',strip_tags($name))->count();
+            $portfolios = Blog::limit(8)->get();
+            $portfolio_count = Blog::count();
             $services = Service::limit(3)->get();
 
             $data  = [

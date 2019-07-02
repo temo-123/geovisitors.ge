@@ -29,7 +29,7 @@ class HomeController extends Controller
         $services = \App\Service::all();
         $blogs = \App\Blog::all();
         $galleries = \App\Gallery::all();
-        $artile_galleries = \App\Article_gallery::all();
+        $article_galleries = \App\Article_gallery::all();
         $tours = \App\Tour::all();
         $abouts = \App\About::all();
 
@@ -37,7 +37,7 @@ class HomeController extends Controller
             'services' => $services,
             'tours' => $tours,
             'galleries' => $galleries,
-            'artile_galleries' => $artile_galleries,
+            'article_galleries' => $article_galleries,
             'blogs' => $blogs,
             'abouts' => $abouts,
 

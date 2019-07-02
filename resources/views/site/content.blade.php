@@ -4,33 +4,43 @@
         <div id="header">
           @if(isset ($abouts) && is_object($abouts))
           <!-- Inner -->
-          <div class="inner">
             @foreach($abouts as $k=>$about)
-            <style type="text/css"> #header {background-image: url("{{ asset('assets/img/about/'.$about->head_image) }}");}</style>
+            <style type="text/css"> 
+            #header {
+              /*background-image: url("{{ asset('assets/img/about/header_image/'.$about->header_image) }}");*/
+              /*filter: brightness(50%);*/
+              background-image: linear-gradient(
+                                  rgba(0,0,0,0.65),
+                                  rgba(0,0,0,0.65)
+                          ),
+                          url('{{ asset('assets/img/about/header_image/'.$about->header_image) }}');
+            }
+            </style>
+          <div class="inner">
             <header>
-              <h1 class="header_title_border">
+              <h1>
                 <a href="index.html" id="logo">GeoVisitors</a></h1>
               <hr />
-              <!-- <p>Thure Company</p> -->
+              {!!$about->description!!}
             </header>
-            @endforeach
             <footer>
               <a href="#banner" class="button circled scrolly">Start</a>
             </footer>
           </div>
+            @endforeach
           @endif
 
           <!-- Nav -->
           <nav id="nav">
             <ul>
-              <li><a href="#banner" class="text_border top_menu_text_size circled scrolly">Services</a></li>
-              <li><a href="#about" class="text_border top_menu_text_size circled scrolly">About us</a></li>
-              <li><a href="#portfolio" class="text_border top_menu_text_size circled scrolly">Portfolio</a></li>
-              <li><a href="#gallery" class="text_border top_menu_text_size circled scrolly">Gallery</a></li>
+              <li><a href="#banner" class="top_menu_text_size circled scrolly">Services</a></li>
+              <li><a href="#about" class="top_menu_text_size circled scrolly">About us</a></li>
+              <li><a href="#portfolio" class="top_menu_text_size circled scrolly">Portfolio</a></li>
+              <li><a href="#gallery" class="top_menu_text_size circled scrolly">Gallery</a></li>
 
               @if (Auth::guest())
               @else
-                  <li class="text_border"><a href="{{route('home')}}" class="circled scrolly">Admin page</a></li>
+                  <li><a href="{{route('home')}}" class="circled scrolly">Admin page</a></li>
               @endif
             </ul>
           </nav>
@@ -42,7 +52,7 @@
           <header>
             <h2>Services</h2>
             @foreach($abouts as $k=>$about)
-              {!!$about->about_service!!}
+              <p>{!!$about->about_service!!}</p>
             @endforeach
           </header>
         </section>
@@ -60,7 +70,7 @@
               <header>
                 <h3><a href="{{ route('service', array('title'=>$service->title)) }}">{{$service->title}}</a></h3>
               </header>
-              <p>{{$service->description}}</p>
+              <p>{!!$service->description!!}</p>
             </article>
             @endforeach
 
@@ -73,13 +83,19 @@
 
           @foreach($abouts as $k=>$about)
           <article id="main" class="container special">
-            <a href="" class="image featured">
-              <img src="{{ asset('assets/img/about/'.$about->image) }}" alt="" />
-            </a>
             <header>
               <h2>About us</h2>
             </header>
+            <!-- <a href="" class="image featured"> -->
+              <img style="margin-bottom: 1%;" src="{{ asset('assets/img/about/'.$about->image) }}" alt="" />
+            <!-- </a> -->
             {!!$about->text!!}
+            <hr>
+            <div class="center" id="reserve">
+              <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary">
+                Send message
+              </button>
+            </div>
           </article>
           @endforeach
 
@@ -87,207 +103,69 @@
       @endif
 
 
-
-
-
-
-
-
-
-
+      <!-- Touts -->
         <section id="banner">
           <header>
             <h2>Thure</h2>
             @foreach($abouts as $k=>$about)
-              {!!$about->about_thure!!}
+              <p>{!!$about->about_thure!!}</p>
             @endforeach
           </header>
         </section>
 
-<div class="container">
-      @foreach($tours as $tour)
-        
-          @if(($thurs_num) == 1)
-            | (hear start)
-          @elseif(($thurs_num % 3) == 0 ) 
-            (hear finish) |
-          @elseif(($thurs_num % 4) == 0 ) 
-            | (hear start) 
-          @endif
+        <div class="container">     
+          <div class="row">
+          <!-- Swiper -->
+            <div class="swiper-container">
+              <div class="swiper-wrapper">
 
-            {block}
+              @foreach($tours as $tour)
 
-          @if(($loop->count) == $thurs_num)
-            (hear finish) |
-          @endif
+              <p style="display: none;">{{$thurs_num++}}</p>
 
-          <p style="display: none;">{{$thurs_num++}}</p>
-      @endforeach
+              @if(($thurs_num) == 1)
 
+              <div class="swiper-slide">
+                <div class="row">
+              @endif
+                  <div class="col-md-3 col-xs-6">
+                    <div class="card">
+                      <div class="card-img">
+                        <img src="{{ asset('assets/img/tour/'.$tour->image) }}">
+                      </div>
+                      <div class="card-body">
+                        <h2>{{$tour -> title}}</h2>
+                        <div class="central_text">
+                        {!!$tour -> description!!}
+                        </div>
+                        <a type= "button" class="btn btn-danger btn-block btn-sm" href="{{route('tour', [$tour -> title])}}">Read more</a>
+                      </div>
+                    </div>
+                  </div>
+              @if(($thurs_num % 4) == 0 ) 
+                </div>
+              </div>
 
+              <div class="swiper-slide">
+                <div class="row">
+              @endif
+              @if(($loop->count) == $thurs_num)
+                </div>
+              </div>
+              @endif
+              @endforeach
+            </div>
+              <!-- Add Pagination -->
 
-<!-- <div class="container">
-    <div class="row text-center mb-3">
-        <div class="col-md-12">
-            <h2>Thure</h2>
-            <p>Information about your thure.</p>
-            <hr>
+              <div class="swiper-pagination"></div>
+              <!-- Add Arrows -->
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+
+              </div>
+            </div>
+          </div>
         </div>
-    </div>-->
-    <!--<div class="row text-center mb-3">
-        <div class="col-md-12">
-            <h2>Top Lists of Safest Car</h2>
-            <p>Lorem Ipsum pagination consumpim in definiction.</p>
-            <hr>
-        </div>
-    </div> -->
-  <div class="row">
-    <!-- Swiper -->
-  <div class="swiper-container">
-<div class="swiper-wrapper">
-
-
-
-
-
-     <!--  <div class="swiper-slide">
-          <div class="row">
-                        <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-img"><img src="https://img.gaadicdn.com/images/carexteriorimages/upcoming/360x240/Jeep/Jeep-Renegade/047.jpg"></div>
-                                <div class="card-body">
-                                   <h5>Renault KWID</h5>
-                                   <h4 class="pt-1 pb-2">Rs. 5.44-6.77 Lac</h4>
-                                 
-                                   <button type= "button" class="btn btn-outline-danger btn-block btn-sm">Lets Judge it.</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-img"><img src="https://img.gaadicdn.com/images/carexteriorimages/upcoming/360x240/Jeep/Jeep-Renegade/047.jpg"></div>
-                                <div class="card-body">
-                                   <h5>Renault KWID</h5>
-                                   <h4 class="pt-1 pb-2">Rs. 5.44-6.77 Lac</h4>
-                                 
-                                   <button type= "button" class="btn btn-outline-danger btn-block btn-sm">Lets Judge it.</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-img"><img src="https://img.gaadicdn.com/images/carexteriorimages/upcoming/360x240/Jeep/Jeep-Renegade/047.jpg"></div>
-                                <div class="card-body">
-                                   <h5>Renault KWID</h5>
-                                   <h4 class="pt-1 pb-2">Rs. 5.44-6.77 Lac</h4>
-                                 
-                                   <button type= "button" class="btn btn-outline-danger btn-block btn-sm">Lets Judge it.</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-      </div>
-      <div class="swiper-slide">
-          <div class="row">
-                        <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-img"><img src="https://img.gaadicdn.com/images/carexteriorimages/upcoming/360x240/Jeep/Jeep-Renegade/047.jpg"></div>
-                                <div class="card-body">
-                                   <h5>Renault KWID</h5>
-                                   <h4 class="pt-1 pb-2">Rs. 5.44-6.77 Lac</h4>
-                                 
-                                   <button type= "button" class="btn btn-outline-danger btn-block btn-sm">Lets Judge it.</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-img"><img src="https://img.gaadicdn.com/images/carexteriorimages/upcoming/360x240/Jeep/Jeep-Renegade/047.jpg"></div>
-                                <div class="card-body">
-                                   <h5>Renault KWID</h5>
-                                   <h4 class="pt-1 pb-2">Rs. 5.44-6.77 Lac</h4>
-                                 
-                                   <button type= "button" class="btn btn-outline-danger btn-block btn-sm">Lets Judge it.</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-img"><img src="https://img.gaadicdn.com/images/carexteriorimages/upcoming/360x240/Jeep/Jeep-Renegade/047.jpg"></div>
-                                <div class="card-body">
-                                   <h5>Renault KWID</h5>
-                                   <h4 class="pt-1 pb-2">Rs. 5.44-6.77 Lac</h4>
-                                 
-                                   <button type= "button" class="btn btn-outline-danger btn-block btn-sm">Lets Judge it.</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-      </div>
-      <div class="swiper-slide">
-          <div class="row">
-                        <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-img"><img src="https://img.gaadicdn.com/images/carexteriorimages/upcoming/360x240/Jeep/Jeep-Renegade/047.jpg"></div>
-                                <div class="card-body">
-                                   <h5>Renault KWID</h5>
-                                   <h4 class="pt-1 pb-2">Rs. 5.44-6.77 Lac</h4>
-                                 
-                                   <button type= "button" class="btn btn-outline-danger btn-block btn-sm">Lets Judge it.</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-img"><img src="https://img.gaadicdn.com/images/carexteriorimages/upcoming/360x240/Jeep/Jeep-Renegade/047.jpg"></div>
-                                <div class="card-body">
-                                   <h5>Renault KWID</h5>
-                                   <h4 class="pt-1 pb-2">Rs. 5.44-6.77 Lac</h4>
-                                 
-                                   <button type= "button" class="btn btn-outline-danger btn-block btn-sm">Lets Judge it.</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-img"><img src="https://img.gaadicdn.com/images/carexteriorimages/upcoming/360x240/Jeep/Jeep-Renegade/047.jpg"></div>
-                                <div class="card-body">
-                                   <h5>Renault KWID</h5>
-                                   <h4 class="pt-1 pb-2">Rs. 5.44-6.77 Lac</h4>
-                                 
-                                   <button type= "button" class="btn btn-outline-danger btn-block btn-sm">Lets Judge it.</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-      </div>
-    </div> -->
-    <!-- Add Pagination -->
-    <div class="swiper-pagination"></div>
-    <!-- Add Arrows -->
-    <div class="swiper-button-next"></div>
-<div class="swiper-button-prev"></div>
-  </div>
-
-  </div>
-</div></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       @if(isset ($galleries) && is_object($galleries))
@@ -299,7 +177,7 @@
             <header>
               <h2>Gallery</h2>
               @foreach($abouts as $k=>$about)
-                {!!$about->about_gallery!!}
+                <p>{!!$about->about_gallery!!}</p>
               @endforeach
             </header>
 
@@ -335,19 +213,21 @@
             <header>
               <h2>Blog</h2>
               @foreach($abouts as $k=>$about)
-                {!!$about->about_portfolio!!}
+                <p>{!!$about->about_blog!!}</p>
               @endforeach
             </header>
             <div class="row">
               @foreach($blogs as $k=>$blog)
-              <article class="col-3 col-12-mobile special">
+              <article class="col-md-3 col-xs-6">
                 <a href="{{ route('blog', array('title'=>$blog->title)) }}" class="image featured">
                   <img src="{{ asset('assets/img/blog/'.$blog->image) }}" alt="" />
                 </a>
                 <header>
                   <h3><a href="#">{{$blog->title}}</a></h3>
                 </header>
-                {{$blog->description}}
+                <div class="central_text">
+                  {!!$blog->description!!}
+                </div>
               </article>
               @endforeach
             </div>
@@ -356,10 +236,8 @@
         </div>
       @endif
 
-
-
-
-
       @include('layouts.footer')
+
+      @include('layouts.message_form')
 
     </div>

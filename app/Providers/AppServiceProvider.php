@@ -27,13 +27,13 @@ class AppServiceProvider extends ServiceProvider
         $about_all_page = About::all();
         View::share('about_all_page', $about_all_page);
 
-        $service_all_page = Service::all();
+        $service_all_page = Service::limit(4)->get();
         View::share('service_all_page', $service_all_page);
 
-        $blog_all_page = Blog::all();
+        $blog_all_page = Blog::limit(4)->get();
         View::share('blog_all_page', $blog_all_page);
 
-        $gallery_all_page = gallery::all();
+        $gallery_all_page = gallery::limit(6)->get();
         View::share('gallery_all_page', $gallery_all_page);
     }
 
