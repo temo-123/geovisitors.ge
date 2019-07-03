@@ -13,7 +13,12 @@
                     @if(isset($service))
                     <style type="text/css">
                       #header {
-                        background-image: url( "{{ asset('assets/img/service/'.$article->image) }}");
+                        /*background-image: url( "{{ asset('assets/img/service/'.$article->image) }}");*/
+                        background-image: linear-gradient(
+                                  rgba(0,0,0,0.65),
+                                  rgba(0,0,0,0.65)
+                          ),
+                          url('{{ asset('assets/img/service/'.$article->image) }}');
                       }
                     </style>
                     <img src="{{ asset('assets/img/service/'.$article->image) }}" alt="" />
