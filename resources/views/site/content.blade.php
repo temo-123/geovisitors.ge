@@ -19,7 +19,7 @@
           <div class="inner">
             <header>
               <h1>
-                <a href="index.html" id="logo">GeoVisitors</a></h1>
+                <a href="#banner" id="logo" class="scrolly">GeoVisitors</a></h1>
               <hr />
               {!!$about->description!!}
             </header>
@@ -40,7 +40,7 @@
 
               @if (Auth::guest())
               @else
-                  <li><a href="{{route('home')}}" class="circled scrolly">Admin page</a></li>
+                  <li><a href="{{route('home')}}" class="top_menu_text_size circled scrolly">Admin page</a></li>
               @endif
             </ul>
           </nav>
@@ -92,7 +92,7 @@
             {!!$about->text!!}
             <hr>
             <div class="center" id="reserve">
-              <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary">
+              <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-danger btn-block btn-sm">
                 Send message
               </button>
             </div>
@@ -108,7 +108,7 @@
           <header>
             <h2>Thure</h2>
             @foreach($abouts as $k=>$about)
-              <p>{!!$about->about_thure!!}</p>
+              <p>{!!$about->about_tour!!}</p>
             @endforeach
           </header>
         </section>
@@ -181,27 +181,19 @@
               @endforeach
             </header>
 
-            <div class="gallery">
-              @foreach($galleries as $k=>$gallery)
-              <figure>
-                <img src="{{ asset('assets/img/gallery/'.$gallery->image) }}" alt="" />
-                <figcaption>{{$gallery->title}}</figcaption>
-              </figure>
-              @endforeach
-            </div>
-
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:none;">
-              <symbol id="close" viewBox="0 0 18 18">
-                <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M9,0.493C4.302,0.493,0.493,4.302,0.493,9S4.302,17.507,9,17.507
-                  S17.507,13.698,17.507,9S13.698,0.493,9,0.493z M12.491,11.491c0.292,0.296,0.292,0.773,0,1.068c-0.293,0.295-0.767,0.295-1.059,0
-                  l-2.435-2.457L6.564,12.56c-0.292,0.295-0.766,0.295-1.058,0c-0.292-0.295-0.292-0.772,0-1.068L7.94,9.035L5.435,6.507
-                  c-0.292-0.295-0.292-0.773,0-1.068c0.293-0.295,0.766-0.295,1.059,0l2.504,2.528l2.505-2.528c0.292-0.295,0.767-0.295,1.059,0
-                  s0.292,0.773,0,1.068l-2.505,2.528L12.491,11.491z"/>
-              </symbol>
-            </svg>
+            <div class="container page-top">
+              <div class="row">
+                  @foreach($galleries as $gallery)
+                  <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                      <a href="{{ asset('assets/img/gallery/'.$gallery->image) }}" class="fancybox" rel="ligthbox">
+                          <img  src="{{ asset('assets/img/gallery/'.$gallery->image) }}" class="zoom img-fluid "  alt="">
+                      </a>
+                  </div>
+                  @endforeach
+              </div>
+          </div>
 
           </section>
-
         </div>
       @endif
 
@@ -222,7 +214,7 @@
                 <a href="{{ route('blog', array('title'=>$blog->title)) }}" class="image featured">
                   <img src="{{ asset('assets/img/blog/'.$blog->image) }}" alt="" />
                 </a>
-                <header>
+                <header class="central_text">
                   <h3><a href="#">{{$blog->title}}</a></h3>
                 </header>
                 <div class="central_text">

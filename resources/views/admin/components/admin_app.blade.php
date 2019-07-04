@@ -13,7 +13,9 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css">
     <!-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> -->
-    <script src="//cdn.ckeditor.com/4.7.3/full/ckeditor.js"></script> 
+    <!-- <script src="//cdn.ckeditor.com/4.7.3/full/ckeditor.js"></script>  -->
+    
+    <script type="text/javascript" src="{{ asset('assets/js/ckeditor/ckeditor.js') }}"></script>
 
     <style>
         body {

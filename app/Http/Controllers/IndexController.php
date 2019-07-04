@@ -20,7 +20,7 @@ class IndexController extends Controller
     	$abouts = About::take(1)->get();
     	$blogs = Blog::where('published','=','1')->latest('id')->limit(4)->get();
     	$services = Service::where('published','=','1')->get();
-    	$galleries = Gallery::where('published','=','1')->take(6)->get();
+    	$galleries = Gallery::inRandomOrder()->where('published','=','1')->take(8)->get();
         $tours = Tour::where('published','=','1')->get();
 
         $data = [

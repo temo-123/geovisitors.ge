@@ -52,9 +52,9 @@
                   <div class="row gtr-25">
                     @foreach($gallery_all_page as $gallery)
                     <div class="col-6">
-                      <a href="#" class="image fit">
-                        <img src="{{ asset('assets/img/gallery/'.$gallery->image) }}" alt="" />
-                      </a>
+                        <a href="{{ asset('assets/img/gallery/'.$gallery->image) }}" class="fancybox image fit" rel="ligthbox">
+                            <img  src="{{ asset('assets/img/gallery/'.$gallery->image) }}" class="footer_zoom" alt="">
+                        </a>
                     </div>
                     @endforeach
                   </div>

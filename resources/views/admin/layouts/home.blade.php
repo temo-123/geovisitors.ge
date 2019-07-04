@@ -74,7 +74,9 @@
                   <tr>
                     <td>{{$service -> id}}</td>
                     <td>|</td>
-                    <td>{{$service -> title}}</td>
+                    <td>
+                      <a href="{{route('service',[$service->title])}}">{{$service -> title}}</a>
+                    </td>
                     <td>|</td>
                     <td>{{$service -> published}}</td>
                     <td>|</td>
@@ -107,6 +109,8 @@
                     <th>|</th>
                     <th>Name</th>
                     <th>|</th>
+                    <th>Category</th>
+                    <th>|</th>
                     <th>Public</th>
                     <th>|</th>
                     <th class="text-right">Edit</th>
@@ -118,7 +122,17 @@
                   <tr>
                     <td>{{$tour -> id}}</td>
                     <td>|</td>
-                    <td>{{$tour -> title}}</td>
+                    <td>
+                      <a href="{{route('tour', [$tour->title])}}">{{$tour -> title}}</a>
+                    </td>
+                    <td>|</td>
+                    <td>
+                      @foreach($services as $service)
+                      @if($service->id == $tour->category_id)
+                        {{$service->title}}
+                      @endif
+                      @endforeach
+                    </td>
                     <td>|</td>
                     <td>{{$tour -> published}}</td>
                     <td>|</td>
@@ -161,7 +175,9 @@
                   <tr>
                     <td>{{$blog -> id}}</td>
                     <td>|</td>
-                    <td>{{$blog -> title}}</td>
+                    <td>
+                      <a href="{{route('blog', [$blog -> title])}}">{{$blog -> title}}</a>
+                    </td>
                     <td>|</td>
                     <td>{{$blog -> published}}</td>
                     <th>|</th>
@@ -236,6 +252,8 @@
                     <th>|</th>
                     <th>Name</th>
                     <th>|</th>
+                    <th>Article</th>
+                    <th>|</th>
                     <th>Public</th>
                     <th>|</th>
                     <th class="text-right">Edit</th>
@@ -249,6 +267,8 @@
                     <td>|</td>
                     <td><button data-toggle="modal" data-target="#ArticleGallery{{$article_gallery_page_num_1++}}">{{ $artile_galleries->title }}</button></td>
                     <td>|</td>
+                    <td>{{$artile_galleries -> article}}</td>
+                    <th>|</th>
                     <td>{{$artile_galleries -> published}}</td>
                     <th>|</th>
                     <td class="text-right">

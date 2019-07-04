@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Blog;
 use App\Service;
 use App\Tour;
+use App\Article_gallery;
 
 class PagesController extends Controller
 {
@@ -18,15 +19,13 @@ class PagesController extends Controller
         if (view()->exists('site.page')) {
             $article = Blog::where('title',strip_tags($name))->first();
 
-            $portfolios = Blog::limit(8)->get();
-            $portfolio_count = Blog::count();
+            $blogs = Blog::latest('id')->limit(8)->get();
             $services = Service::limit(3)->get();
 
             $data  = [
                 'name'=>$article->name,
                 'article'=>$article,
-                'portfolio_count'=>$portfolio_count,
-                'portfolios' => $portfolios,
+                'blogs' => $blogs,
                 'services' => $services,
 
                 'blog' => 1,
@@ -46,14 +45,17 @@ class PagesController extends Controller
         if (view()->exists('site.page')) {
             $article = Service::where('title',strip_tags($name))->first();
 
-
-            $services = Service::limit(3)->get();
+            $services = Service::limit(6)->get();
+            $article_galleries = Article_gallery::inRandomOrder()->where('published','=','1')->take(8)->where('article',strip_tags($name))->limit(8)->get();
+            $tours = Tour::get();
 
             $data  = [
                 'name'=>$article->name,
                 'article'=>$article,
 
                 'services' => $services,
+                'tours' => $tours,
+                'article_galleries' => $article_galleries,
 
                 'service'=>1,
             ];
@@ -72,14 +74,14 @@ class PagesController extends Controller
         if (view()->exists('site.page')) {
             $article = Tour::where('title',strip_tags($name))->first();
 
-
-            $services = Tour::limit(3)->get();
+            $article_galleries = Article_gallery::inRandomOrder()->where('published','=','1')->take(8)->where('article',strip_tags($name))->limit(8)->get();
 
             $data  = [
                 'name'=>$article->name,
                 'article'=>$article,
 
-                'services' => $services,
+                // 'services' => $services,
+                'article_galleries' => $article_galleries,
 
                 'tour'=>1,
             ];

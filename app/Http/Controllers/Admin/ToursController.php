@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Tour;
+use App\Service;
 use File;
 
 class ToursController extends Controller
@@ -58,7 +59,7 @@ class ToursController extends Controller
                 return redirect()->route('home') -> with('status', 'tour addid'); //text
             }
         }
-
+        $services = Service::get();
         if (view() -> exists('admin.layouts.form')) {
             $data=[
                 'title' => 'New page',
@@ -67,7 +68,8 @@ class ToursController extends Controller
                 'published' => 1,
                 'description' => 1,
                 'text' => 1,
-                'image' => $image_dir
+                'image' => $image_dir,
+                'categories' => $services,
             ];
             // dd($data);
             return view('admin.layouts.form', $data);
@@ -151,6 +153,7 @@ class ToursController extends Controller
         $old = $tour -> toArray();
         // dd($input);
 
+        $services = Service::get();
         if (view()->exists('admin.layouts.form')) {
             $data = [
                 'title' => 'Edit news - '.$old['title'],
@@ -160,7 +163,8 @@ class ToursController extends Controller
                 'published' => 1,
                 'description' => 1,
                 'text' => 1,
-                'image' => $image_dir
+                'image' => $image_dir,
+                'categories' => $services,
             ];          
             return view('admin.layouts.form', $data);
         }

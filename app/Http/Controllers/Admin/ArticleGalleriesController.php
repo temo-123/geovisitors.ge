@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Article_gallery;
+use App\Tour;
+use App\Service;
 use File;
 
 class ArticleGalleriesController extends Controller
@@ -58,11 +60,16 @@ class ArticleGalleriesController extends Controller
                 return redirect()->route('home') -> with('status', 'article_gallery addid'); //text
             }
         }
-
+        $tours = Tour::get();
+        $services = Service::get();
         if (view() -> exists('admin.layouts.form')) {
             $data=[
                 'title' => 'New page',
+
+                'tours' => $tours,
+                'services' => $services,
                 
+                'article' => 1,
                 'add_form'=>'article_galleryAdd',
                 'published' => 1,
                 'image' => $image_dir
@@ -149,11 +156,17 @@ class ArticleGalleriesController extends Controller
         $old = $article_gallery -> toArray();
         // dd($input);
 
+        $tours = Tour::get();
+        $services = Service::get();
         if (view()->exists('admin.layouts.form')) {
             $data = [
                 'title' => 'Edit news - '.$old['title'],
                 'data' => $old,
 
+                'tours' => $tours,
+                'services' => $services,
+                
+                'article' => 1,
                 'edit_form'=>'article_galleryEdit',
                 'published' => 1,
                 'image' => $image_dir

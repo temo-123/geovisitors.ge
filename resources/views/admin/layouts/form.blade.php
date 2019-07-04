@@ -48,6 +48,60 @@
 		</div>
 		@endif
 
+		@if(isset($article))
+		<div class="form-group clearfix">
+    		{!! Form::label('name', 'Route:', ['class'=>'col-xs-2 control-label']) !!}
+			<div class="col-xs-8">
+				<select class="form-control" name="article"> 
+					 
+				@if (isset($data)) 
+					<option value="tours">Tours---------------------</option>
+					@foreach($tours as $tour)
+					<option value="{{$tour -> title}}" @if ($data['article'] == $tour -> title) selected="" @endif>{{$tour -> title}}</option>
+					@endforeach
+					<option value="service">Service--------------------</option>
+					@foreach($services as $service)
+					<option value="{{$service -> title}}" @if ($data['article'] == $service -> title) selected="" @endif>{{$service -> title}}</option>
+					@endforeach
+				@else 
+					<option value="tours">Tours---------------------</option>
+					@foreach($tours as $tour)
+					<option value="{{$tour -> title}}">{{$tour -> title}}</option> 
+					@endforeach
+					<option value="service">Service--------------------</option>
+					@foreach($services as $service)
+					<option value="{{$service -> title}}">{{$service -> title}}</option> 
+					@endforeach
+				@endif 
+					 
+				</select>
+			</div>
+		</div>
+		@endif
+
+		@if(isset($categories))
+		<div class="form-group clearfix">
+    		{!! Form::label('name', 'Route:', ['class'=>'col-xs-2 control-label']) !!}
+			<div class="col-xs-8">
+				<select class="form-control" name="category_id"> 
+					 
+				@if (isset($data))
+					<option value="0">Category</option>
+					@foreach($categories as $category)
+					<option value="{{$category->id}}" @if ($data['category_id'] == $category->id) selected="" @endif>{{$category->title}}</option>
+					@endforeach
+				@else
+					<option value="0">Category</option> 
+					@foreach($categories as $category)
+					<option value="{{$category->id}}">{{$category->title}}</option> 
+					@endforeach
+				@endif 
+					 
+				</select>
+			</div>
+		</div>
+		@endif
+
 		@if(isset($title))
 	    <div class="form-group clearfix">	
     		{!! Form::label('title', 'Title:', ['class'=>'col-xs-2 control-label']) !!}
@@ -56,6 +110,19 @@
 				    {!! Form::text('title', $data['title'], ['class'=>'form-control', 'placeholder'=>'Page title']) !!}
     		    @else
     				{!! Form::text('title', old('title'), ['class'=>'form-control', 'placeholder'=>'Page title']) !!}
+    			@endif
+			</div>
+		</div>
+		@endif
+
+		@if(isset($site_url))
+	    <div class="form-group clearfix">	
+    		{!! Form::label('site_url', 'Title:', ['class'=>'col-xs-2 control-label']) !!}
+			<div class="col-xs-8">
+    		    @if (isset($data)) 
+				    {!! Form::text('site_url', $data['site_url'], ['class'=>'form-control', 'placeholder'=>'Page title']) !!}
+    		    @else
+    				{!! Form::text('site_url', old('site_url'), ['class'=>'form-control', 'placeholder'=>'Page title']) !!}
     			@endif
 			</div>
 		</div>
@@ -123,18 +190,19 @@
 
 		@if(isset($mail))
 	    <div class="form-group clearfix">	
-    		{!! Form::label('mail', 'Mail:', ['class'=>'col-xs-2 control-label']) !!}
+    		{!! Form::label('email', 'email:', ['class'=>'col-xs-2 control-label']) !!}
 			<div class="col-xs-8">
     		    @if (isset($data)) 
-				    {!! Form::text('mail', $data['mail'], ['class'=>'form-control', 'placeholder'=>'Page title']) !!}
+				    {!! Form::text('email', $data['email'], ['class'=>'form-control', 'placeholder'=>'Page title']) !!}
     		    @else
-    				{!! Form::text('mail', old('mail'), ['class'=>'form-control', 'placeholder'=>'Page title']) !!}
+    				{!! Form::text('email', old('email'), ['class'=>'form-control', 'placeholder'=>'Page title']) !!}
     			@endif
 			</div>
 		</div>
 		@endif
 		
     	@if(isset($about_service))
+    	<hr>
 	    <div class="form-group clearfix">	
     		{!! Form::label('about_service', 'about_service:', ['class'=>'col-xs-2 control-label']) !!}
 			<div class="col-xs-8">
@@ -149,12 +217,12 @@
 
     	@if(isset($about_thure))
 	    <div class="form-group clearfix">	
-    		{!! Form::label('about_thure', 'about_thure:', ['class'=>'col-xs-2 control-label']) !!}
+    		{!! Form::label('about_tour', 'about_tour:', ['class'=>'col-xs-2 control-label']) !!}
 			<div class="col-xs-8">
     		    @if (isset($data)) 
-				    {!! Form::text('about_thure', $data['about_thure'], ['class'=>'form-control', 'placeholder'=>'Page title']) !!}
+				    {!! Form::text('about_tour', $data['about_tour'], ['class'=>'form-control', 'placeholder'=>'Page title']) !!}
     		    @else
-    				{!! Form::text('about_thure', old('about_thure'), ['class'=>'form-control', 'placeholder'=>'Page title']) !!}
+    				{!! Form::text('about_tour', old('about_tour'), ['class'=>'form-control', 'placeholder'=>'Page title']) !!}
     			@endif
 			</div>
 		</div>
@@ -184,6 +252,7 @@
     			@endif
 			</div>
 		</div>
+		<hr>
 		@endif
 	
 	@if(isset($image))
@@ -233,6 +302,32 @@
 			{!! Form::label('header_image', 'Header image', ['class'=>'col-xs-2 control-label']) !!}
 			<div class="col-xs-8">
 				{!! Form::file('header_image', ['class'=>'filestyle', 'data-buttonText'=>'Select an image', 'data-buttonName'=>'btn-primary', 'data-placholder'=>'No file']) !!}
+			</div>
+		</div>
+        @endif
+    @endif
+	
+	@if(isset($site_image))
+    	@if (isset($data))
+        <div class="form-group">
+			{!! Form::label('old_site_image', 'Old header image', ['class'=>'col-xs-2 control-label']) !!}
+			<div class="col-xs-8">
+				{!! Html::image ('assets/img/'.$site_image.'/'.$data['site_image'],'', ['class'=>'img-circle img-responaive','width'=>'150px']) !!}
+
+				{!! Form::hidden('old_site_image', $data['site_image']) !!}
+			</div>
+		</div>
+		<div class="form-group">
+			{!! Form::label('site_image', 'Add new header image', ['class'=>'col-xs-2 control-label']) !!}
+			<div class="col-xs-8">
+				{!! Form::file('site_image', ['class'=>'filestyle', 'data-buttonText'=>'Select an image', 'data-buttonName'=>'btn-primary', 'data-placholder'=>'No file']) !!}
+			</div>
+		</div>
+		@else
+    	<div class="form-group">
+			{!! Form::label('site_image', 'Header image', ['class'=>'col-xs-2 control-label']) !!}
+			<div class="col-xs-8">
+				{!! Form::file('site_image', ['class'=>'filestyle', 'data-buttonText'=>'Select an image', 'data-buttonName'=>'btn-primary', 'data-placholder'=>'No file']) !!}
 			</div>
 		</div>
         @endif

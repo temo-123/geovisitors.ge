@@ -63,6 +63,7 @@ class AboutController extends Controller
     {
         $image_dir = 'about';
         $header_image_dir = 'about/header_image';
+        $site_image_dir = 'about/site_image';
 
         if ($request->isMethod('post')) {
             $input = $request -> except('_token');
@@ -97,6 +98,8 @@ class AboutController extends Controller
 
                 // delite old file
                 $fileName = $about['image'];
+                
+                dd($about);
                 $destinationPath = 'assets/img/about/';
                 File::delete($destinationPath.$fileName);
 
@@ -141,6 +144,40 @@ class AboutController extends Controller
             }
             unset($input ['old_header_image']);
             $about -> fill($input);
+
+            // --------------
+            // ssite image
+            // --------------
+            if ($request->hasFile('site_image')) {
+
+                $file = $request -> file('site_image');
+
+                //get original file
+                $input['site_image'] = $file -> getClientOriginalName();
+
+                //rename file
+                $pieces = explode( '.', $input['site_image'] );
+                $fruit = array_pop($pieces);
+                $comma_separated = implode(",", $pieces);
+                $site_image_name = $comma_separated.'_('.date('Y-m-d-H-m-s').').'.$fruit;
+
+                // move fili in derectory
+                $file -> move(public_path().'/assets/img/'.$site_image_dir, $site_image_name);
+
+                // delite old file
+                $fileName = $about['site_image'];
+                dd($about);
+                $destinationPath = 'assets/img/about/site_image/';
+                File::delete($destinationPath.$fileName);
+
+                // updete file name for add in DB
+                $input['site_image'] = $site_image_name; 
+            }
+            else {
+                $input['site_image'] = $input['old_site_image'];
+            }
+            unset($input ['old_site_image']);
+            $about -> fill($input);
             // dd($input);
 
             if ($about->update()) {
@@ -160,10 +197,12 @@ class AboutController extends Controller
                 'data' => $old,
 
                 'edit_form'=>'aboutEdit',
+                'site_url' => 1,
                 'description' => 1,
                 'text' => 1,
                 'image' => $image_dir,
                 'header_image' => $header_image_dir,
+                'site_image' => $site_image_dir,
                 'about_service' => 1,
                 'about_thure' => 1,
                 'about_gallery' => 1,
