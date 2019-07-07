@@ -2953,6 +2953,9 @@ input, select, textarea {
 					color: #ddd;
 					border: 0;
 					border-top: dotted 1px rgba(255, 255, 255, 0.05);
+							
+            		text-align: center;
+                    font-size: 20px;
 				}
 
 					#navPanel .link:first-child {
