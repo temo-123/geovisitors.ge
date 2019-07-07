@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Validator;
+
 use File;
 use App\Service;
 
@@ -32,6 +34,16 @@ class ServicesController extends Controller
         if ($request -> isMethod('post')) {
             $input = $request -> except('_token');
 
+            $validator = validator::make($input, [
+                'title' => 'required|max:190',
+                'description' => 'required|max:100',
+                'text' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            if ($validator->fails()) {
+                return back() -> withErrors($validator) -> withInput();
+            }
+
             if ($request->hasFile('image')) {
                 
                 $file = $request -> file('image');
@@ -55,7 +67,10 @@ class ServicesController extends Controller
             $Service -> fill($input);
 
             if ($Service->save()) {
-                return redirect()->route('home') -> with('status', 'services addid'); //text
+                return redirect()->route('home') -> with('good_status', 'services addid'); //text
+            }
+            else{
+                return redirect()->route('home')->with('bed_status','Error! Service not addid'); //text
             }
         }
 
@@ -109,6 +124,16 @@ class ServicesController extends Controller
 
         if ($request->isMethod('post')) {
             $input = $request -> except('_token');
+
+            $validator = validator::make($input, [
+                'title' => 'required|max:190',
+                'description' => 'required|max:100',
+                'text' => 'required',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            if ($validator->fails()) {
+                return back() -> withErrors($validator) -> withInput();
+            }
 
             if ($request->hasFile('image')) {
 

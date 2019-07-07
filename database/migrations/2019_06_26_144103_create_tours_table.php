@@ -16,13 +16,13 @@ class CreateToursTable extends Migration
         Schema::create('tours', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('title');
-            $table->string('description');
-            $table->text('text');
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
+            $table->text('text')->nullable();
 
-            $table->string('image', 100);
+            $table->string('image', 100)->nullable();
 
-            $table->integer('category_id');
+            $table->integer('category_id')->nullable();
 
             $table->integer('published');
             

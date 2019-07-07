@@ -16,10 +16,10 @@ class CreateTableServices extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('title');
-            $table->string('description');
-            $table->string('image', 100);
-            $table->text('text');
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
+            $table->string('image', 100)->nullable();
+            $table->text('text')->nullable();
 
             $table->integer('published');
 

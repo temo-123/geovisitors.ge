@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Validator;
+
 use App\Gallery;
 use File;
 
@@ -31,6 +33,14 @@ class GalleriesController extends Controller
 
         if ($request -> isMethod('post')) {
             $input = $request -> except('_token');
+
+            $validator = validator::make($input, [
+                'title' => 'required|max:190',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            if ($validator->fails()) {
+                return back() -> withErrors($validator) -> withInput();
+            }
 
             if ($request->hasFile('image')) {
                 
@@ -106,6 +116,14 @@ class GalleriesController extends Controller
 
         if ($request->isMethod('post')) {
             $input = $request -> except('_token');
+
+            $validator = validator::make($input, [
+                'title' => 'required|max:190',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            if ($validator->fails()) {
+                return back() -> withErrors($validator) -> withInput();
+            }
 
             if ($request->hasFile('image')) {
 

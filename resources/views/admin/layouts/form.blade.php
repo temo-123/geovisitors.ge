@@ -4,9 +4,15 @@
 
     <div class="container">
     	<div class="form-group">
-        	@if(Session::has('message'))
-        		{{Session::get('message')}}
-        	@endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
         @if(isset($back_btn))
     	<div class="form-group">

@@ -11,7 +11,7 @@ use View;
 use App\About;
 use App\Service;
 use App\Blog;
-use App\gallery;
+use App\Gallery;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
         $blog_all_page = Blog::where('published','=','1')->limit(4)->get();
         View::share('blog_all_page', $blog_all_page);
 
-        $gallery_all_page = gallery::inRandomOrder()->where('published','=','1')->limit(6)->get();
+        $gallery_all_page = Gallery::inRandomOrder()->where('published','=','1')->limit(6)->get();
         View::share('gallery_all_page', $gallery_all_page);
     }
 

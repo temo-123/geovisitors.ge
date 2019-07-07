@@ -19,7 +19,7 @@
           <div class="inner">
             <header>
               <h1>
-                <a href="#banner" id="logo" class="scrolly">GeoVisitors</a></h1>
+                <a href="#banner" id="logo" class="scrolly">{!!$about->title!!}</a></h1>
               <hr />
               {!!$about->description!!}
             </header>

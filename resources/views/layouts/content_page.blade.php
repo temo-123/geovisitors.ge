@@ -5,10 +5,10 @@
             <div class="row gtr-200">
               <div class="col-8 col-12-mobile" id="content">
                 <article id="main">
-                  <header>
+                  <!--<header>-->
                     <!-- <h2><a href="#">{{$article -> title}}</a></h2> -->
-                    <h2>{{$article -> title}}</h2>
-                  </header>
+                    <!--<h2>{{$article -> title}}</h2>-->
+                  <!--</header>-->
                   <div class="image featured">
                     @if(isset($service))
                     <style type="text/css">

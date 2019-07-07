@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Validator;
+
 use App\Article_gallery;
 use App\Tour;
 use App\Service;
@@ -33,6 +35,14 @@ class ArticleGalleriesController extends Controller
 
         if ($request -> isMethod('post')) {
             $input = $request -> except('_token');
+
+            $validator = validator::make($input, [
+                'title' => 'required|max:190',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            if ($validator->fails()) {
+                return back() -> withErrors($validator) -> withInput();
+            }
 
             if ($request->hasFile('image')) {
                 
@@ -114,6 +124,14 @@ class ArticleGalleriesController extends Controller
 
         if ($request->isMethod('post')) {
             $input = $request -> except('_token');
+
+            $validator = validator::make($input, [
+                'title' => 'required|max:190',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            if ($validator->fails()) {
+                return back() -> withErrors($validator) -> withInput();
+            }
 
             if ($request->hasFile('image')) {
 

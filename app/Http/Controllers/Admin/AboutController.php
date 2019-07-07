@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Validator;
+
 use App\About;
 use File;
-use Validator;
 
 class AboutController extends Controller
 {
@@ -72,6 +73,9 @@ class AboutController extends Controller
                 'title' => 'required|max:190',
                 'description' => 'required|max:100',
                 'text' => 'required',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'header_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'site_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
             if ($validator->fails()) {
                 return back() -> withErrors($validator) -> withInput();

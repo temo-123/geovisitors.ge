@@ -33,6 +33,16 @@ class ToursController extends Controller
         if ($request -> isMethod('post')) {
             $input = $request -> except('_token');
 
+            $validator = validator::make($input, [
+                'title' => 'required|max:190',
+                'description' => 'required|max:100',
+                'text' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            if ($validator->fails()) {
+                return back() -> withErrors($validator) -> withInput();
+            }
+
             if ($request->hasFile('image')) {
                 
                 $file = $request -> file('image');
@@ -111,6 +121,16 @@ class ToursController extends Controller
 
         if ($request->isMethod('post')) {
             $input = $request -> except('_token');
+
+            $validator = validator::make($input, [
+                'title' => 'required|max:190',
+                'description' => 'required|max:100',
+                'text' => 'required',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            if ($validator->fails()) {
+                return back() -> withErrors($validator) -> withInput();
+            }
 
             if ($request->hasFile('image')) {
 
