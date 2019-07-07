@@ -35,7 +35,7 @@
             <ul>
               <li><a href="#banner" class="top_menu_text_size circled scrolly">Services</a></li>
               <li><a href="#about" class="top_menu_text_size circled scrolly">About us</a></li>
-              <li><a href="#portfolio" class="top_menu_text_size circled scrolly">Portfolio</a></li>
+              <li><a href="#portfolio" class="top_menu_text_size circled scrolly">Blog</a></li>
               <li><a href="#gallery" class="top_menu_text_size circled scrolly">Gallery</a></li>
 
               @if (Auth::guest())
