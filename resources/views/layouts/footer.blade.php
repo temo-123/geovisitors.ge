@@ -49,7 +49,7 @@
                     <h2 class="icon fa-camera circled"></h2>
                     <h3>Gallery</h3>
                   </header>
-                  <div class="row gtr-25">
+                  <div class="row gtr-25" style='margin: 5%;'>
                     @foreach($gallery_all_page as $gallery)
                     <div class="col-6">
                         <a href="{{ asset('assets/img/gallery/'.$gallery->image) }}" class="fancybox image fit" rel="ligthbox">
