@@ -99,7 +99,7 @@ class AboutController extends Controller
                 // delite old file
                 $fileName = $about['image'];
                 
-                dd($about);
+                // dd($fileName);
                 $destinationPath = 'assets/img/about/';
                 File::delete($destinationPath.$fileName);
 
@@ -110,7 +110,7 @@ class AboutController extends Controller
                 $input['image'] = $input['old_image'];
             }
             unset($input ['old_image']);
-            $about -> fill($input);
+            // $about -> fill($input);
 
             // --------------
             // header image
@@ -134,6 +134,8 @@ class AboutController extends Controller
                 // delite old file
                 $fileName = $about['header_image'];
                 $destinationPath = 'assets/img/about/header_image/';
+                // $filePatchForDelated = $destinationPath.$fileName;
+                // dd($about['header_image']);
                 File::delete($destinationPath.$fileName);
 
                 // updete file name for add in DB
@@ -143,7 +145,7 @@ class AboutController extends Controller
                 $input['header_image'] = $input['old_header_image'];
             }
             unset($input ['old_header_image']);
-            $about -> fill($input);
+            // $about -> fill($input);
 
             // --------------
             // ssite image
@@ -166,7 +168,7 @@ class AboutController extends Controller
 
                 // delite old file
                 $fileName = $about['site_image'];
-                dd($about);
+                // dd($about);
                 $destinationPath = 'assets/img/about/site_image/';
                 File::delete($destinationPath.$fileName);
 
@@ -208,7 +210,8 @@ class AboutController extends Controller
                 'about_gallery' => 1,
                 'about_blog' => 1,
                 'social' => 1,
-                'mail' => 1
+                'mail' => 1,
+                'num' => 1
             ];          
             return view('admin.layouts.form', $data);
         }

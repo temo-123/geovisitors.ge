@@ -16,10 +16,12 @@ class CreateTableServices extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('title', 25);
+            $table->string('title');
             $table->string('description');
-            $table->string('images', 100);
+            $table->string('image', 100);
             $table->text('text');
+
+            $table->integer('published');
 
             $table->timestamps();
         });

@@ -32,6 +32,7 @@
 
     @foreach($about_all_page as $about)
     <meta property="og:url"             content="{{$about -> site_url}}" />
+    <link href="{{ asset('assets/img/about/site_image/'.$about -> site_image) }}" rel="shortcut icon">
     @endforeach
 
     <meta charset="utf-8" />

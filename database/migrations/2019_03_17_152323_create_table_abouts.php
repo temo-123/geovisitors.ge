@@ -16,15 +16,26 @@ class CreateTableAbouts extends Migration
         Schema::create('abouts', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('title', 25);
+            $table->string('title');
             $table->string('description');
-            $table->string('images', 100);
             $table->text('text');
 
-            $table->text('fb');
-            $table->text('inst');
-            $table->text('twit');
-            $table->text('gm');
+            $table->string('image', 100)->nullable();
+            $table->string('header_image', 100)->nullable();
+            $table->string('site_image', 100)->nullable();
+
+            $table->text('fb')->nullable();
+            $table->text('inst')->nullable();
+            $table->text('twit')->nullable();
+            $table->text('email')->nullable();
+            $table->text('num')->nullable();
+
+            $table->string('about_service', 100)->nullable();
+            $table->string('about_tour', 100)->nullable();
+            $table->string('about_gallery', 100)->nullable();
+            $table->string('about_blog', 100)->nullable();
+
+            $table->string('site_url', 100)->nullable();
 
             $table->timestamps();
         });

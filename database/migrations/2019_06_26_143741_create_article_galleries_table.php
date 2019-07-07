@@ -16,10 +16,15 @@ class CreateArticleGalleriesTable extends Migration
         Schema::create('article_galleries', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('title', 25);
+            $table->string('title');
             $table->string('description');
-            $table->string('images', 100);
             $table->text('text');
+
+            $table->string('image', 100);
+            
+            $table->string('article', 100);
+
+            $table->integer('published');
             
             $table->timestamps();
         });

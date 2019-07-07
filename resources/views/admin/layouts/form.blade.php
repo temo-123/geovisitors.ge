@@ -190,12 +190,25 @@
 
 		@if(isset($mail))
 	    <div class="form-group clearfix">	
-    		{!! Form::label('email', 'email:', ['class'=>'col-xs-2 control-label']) !!}
+    		{!! Form::label('email', 'Email:', ['class'=>'col-xs-2 control-label']) !!}
 			<div class="col-xs-8">
     		    @if (isset($data)) 
 				    {!! Form::text('email', $data['email'], ['class'=>'form-control', 'placeholder'=>'Page title']) !!}
     		    @else
     				{!! Form::text('email', old('email'), ['class'=>'form-control', 'placeholder'=>'Page title']) !!}
+    			@endif
+			</div>
+		</div>
+		@endif
+
+		@if(isset($num))
+	    <div class="form-group clearfix">	
+    		{!! Form::label('num', 'Phone number:', ['class'=>'col-xs-2 control-label']) !!}
+			<div class="col-xs-8">
+    		    @if (isset($data)) 
+				    {!! Form::text('num', $data['num'], ['class'=>'form-control', 'placeholder'=>'Page title']) !!}
+    		    @else
+    				{!! Form::text('num', old('num'), ['class'=>'form-control', 'placeholder'=>'Page title']) !!}
     			@endif
 			</div>
 		</div>

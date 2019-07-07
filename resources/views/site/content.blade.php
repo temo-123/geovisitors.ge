@@ -47,6 +47,7 @@
 
         </div>
 
+      @if($services != NULL)
       <!-- Banner -->
         <section id="banner">
           <header>
@@ -77,6 +78,8 @@
           </div>
         </section>
       @endif
+      @endif
+
       @if(isset ($abouts) && is_object($abouts))
       <!-- Main -->
         <div class="wrapper style2" id="about">
@@ -90,6 +93,11 @@
               <img style="margin-bottom: 1%;" src="{{ asset('assets/img/about/'.$about->image) }}" alt="" />
             <!-- </a> -->
             {!!$about->text!!}
+            <hr>
+            <div class="row">
+              <div class="col-md-6"><h4>{!!$about->email!!}</h4></div>
+              <div class="col-md-6"><h4>{!!$about->num!!}</h4></div>
+            </div>
             <hr>
             <div class="center" id="reserve">
               <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-danger btn-block btn-sm">
